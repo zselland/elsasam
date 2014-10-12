@@ -1874,8 +1874,6 @@ class WPMDB extends WPMDB_Base {
 
 		do_action( 'wpmdb_load_assets' );
 
-
-		
 		$src = $plugins_url . "asset/js/script$min.js";
 		wp_enqueue_script( 'wp-migrate-db-pro-script', $src, array( 'jquery' ), $version, true );
 

@@ -60,11 +60,11 @@ class WPMDB_Base {
 		$this->addons = array(
 			'wp-migrate-db-pro-media-files/wp-migrate-db-pro-media-files.php' => array(
 				'name'	=> 'Media Files',
-				'required_version' => '1.1.4',
+				'required_version' => '1.1.5',
 			),
 			'wp-migrate-db-pro-cli/wp-migrate-db-pro-cli.php' => array(
 				'name'	=> 'CLI',
-				'required_version' => '1.0',
+				'required_version' => '1.0.1',
 			)
 		);
 
@@ -504,6 +504,12 @@ class WPMDB_Base {
 
 	function is_valid_licence( $skip_transient_check = false ) {
 		$response = $this->is_licence_expired( $skip_transient_check );
+
+		// Don't cripple the plugin's functionality if the user's licence is expired
+		if ( isset( $response['errors']['subscription_expired'] ) && 1 === count( $response['errors'] ) ) {
+			return true;
+		}
+
 		return ( isset( $response['errors'] ) ) ? false : true;
 	}
 

@@ -1,4 +1,7 @@
-delete me
+/* @override 
+	http://dev3.elsasam.com/wp-content/themes/elsasam/css/elsasam.css
+	http://elsasam.local/wp-content/themes/elsasam/css/elsasam.css */
+
 
 /*
 HOVERNAV
@@ -98,9 +101,10 @@ An example of how to use CSS to display an image as a background of an HTML elem
 
 #site-title a {
   display: inline-block;
-  padding: 30px 0 30px 100px;
-  background: url(../img/elsasam.png) 0 0 no-repeat;
-  background-size: 95px 95px
+  height: 100px;
+  width: 344px;
+  background: url(../img/elsasam-logo-new.jpg) 0 0 no-repeat;
+  
 }
 #site-title a:hover {
   background: url(../img/elsasam-hover.png) 0 0 no-repeat;

@@ -16,7 +16,7 @@ $slide_args = array(
 $slide_query = new WP_Query( $slide_args );
 ?>
 
-<div id="carousel-main-home" class="carousel slide feature-area" data-ride="carousel">
+<div id="carousel-main-home" class="carousel slide feature-area" data-ride="carousel" data-interval="false">
 	<?php if($slide_query->have_posts()) : 
 	$i = 0; ?>
 	<ol class="carousel-indicators">
@@ -42,12 +42,16 @@ $slide_query = new WP_Query( $slide_args );
 		$cta_align_class = get_post_meta($post->ID, '_elsasam_slide_cta_position', true);
 	?>
 
-    <div class="item <?php echo $active; ?> post-ID-<?php echo $post->ID; ?>" style="background-image:url(<?php echo get_post_meta($post->ID, '_elsasam_bg_image', true); ?>);">
+    <div class="item <?php echo $active; ?> post-ID-<?php echo $post->ID; ?>">
 		<div class="container">
 			<div class="row">
-				<div class="<?php echo $cta_align_class; ?>">
-					<div class="slide-cta">
-						<?php echo wpautop(get_post_meta($post->ID, '_elsasam_slide_cta', true)); ?>
+				<div class="col-sm-12" style="background-image:url(<?php echo get_post_meta($post->ID, '_elsasam_bg_image', true); ?>);">
+					<div class="row">
+						<div class="<?php echo $cta_align_class; ?>">
+							<div class="slide-cta">
+								<?php echo wpautop(get_post_meta($post->ID, '_elsasam_slide_cta', true)); ?>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

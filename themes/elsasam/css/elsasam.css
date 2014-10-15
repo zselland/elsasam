@@ -99,26 +99,32 @@ Header logo
 An example of how to use CSS to display an image as a background of an HTML element.
 */
 
-#site-title a {
+a.navbar-brand {
   display: inline-block;
-  height: 100px;
-  width: 344px;
-  background: url(../img/elsasam-logo-new.jpg) 0 0 no-repeat;
+  height: 141px;
+  width: 200px;
+  background: url(../img/es_logo_stacked.png) 0 0 no-repeat;
   
 }
-#site-title a:hover {
-  background: url(../img/elsasam-hover.png) 0 0 no-repeat;
-  background-size: 95px 95px;
-  text-decoration: none
+.navbar-default {
+	background-color: #fff;
+	margin-bottom: 0;
+	border: 0;
 }
 .main-nav {
-  margin-top: 20px
+  margin-top: 20px;
+	margin-bottom: 20px;
 }
-
+#menu-main-menu {
+  margin-top: 100px
+}
 /*
 Carousel
 */
-.carousel .item {
+.carousel .item .container>.row {
+	padding: 0 15px;
+}
+.carousel .item .container>.row>.col-sm-12 {
 	height: 300px;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -241,4 +247,17 @@ Woocommerce re-styling
 .woocommerce-page .woocommerce-info:before,
 .woocommerce-page .woocommerce-message:before {
   padding-top: 0
+}
+
+@media (max-width: 768px) {
+	a.navbar-brand {
+	  display: inline-block;
+	  height: 58px;
+	  width: 197px;
+	  background: url(../img/es_logo_mobile.png) 0 0 no-repeat;
+	  
+	}
+	#menu-main-menu {
+	  margin-top: 0
+	}	
 }

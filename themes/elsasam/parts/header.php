@@ -17,16 +17,6 @@
 <![endif]-->    
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h1 id="site-title">
-          <a class="text-hide" href="<?php echo home_url('/'); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home"><?php bloginfo('name'); ?></a>
-        </h1>
-      </div>
-    </div>
-  </div>
-
 <?php
 /*
 Lower menubar (main menubar, below site title)
@@ -44,7 +34,7 @@ register_nav_menu('lower-bar', __('Main menu (below site title)'));
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <?php /* <a class="navbar-brand" href="<?php echo home_url('/'); ?>"><?php bloginfo('name'); ?></a> */ ?>
+        <a class="navbar-brand text-hide" href="<?php echo home_url('/'); ?>"><?php bloginfo('name'); ?></a>
       </div><!-- /.navbar-header -->
       <div class="collapse navbar-collapse lower-navbar">    
         <?php				
@@ -53,7 +43,7 @@ register_nav_menu('lower-bar', __('Main menu (below site title)'));
               'depth' => 0,
               'container'	=> false,
               'fallback_cb' => false,
-              'menu_class' => 'nav navbar-nav',
+              'menu_class' => 'nav navbar-nav navbar-right',
               'walker' => new BootstrapNavMenuWalker()
             );
             wp_nav_menu($args);

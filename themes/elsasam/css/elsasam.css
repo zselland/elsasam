@@ -2,7 +2,20 @@
 	http://dev3.elsasam.com/wp-content/themes/elsasam/css/elsasam.css
 	http://elsasam.local/wp-content/themes/elsasam/css/elsasam.css */
 
+@import url(http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic);
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,700,900,200);
 
+body {
+	font-family: 'PT Serif', serif;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: Raleway;
+	font-weight: 700;
+	color: #444;
+}
+h1 {
+	font-size: 30px;
+}
 /*
 HOVERNAV
 A simple addition to the dropdown menu (Bootstrap itself is unchanged). Navbar dropdowns appear on hover.
@@ -94,6 +107,11 @@ Max content widths
 	height: auto
 }
 
+#header {
+	padding: 20px 0;
+	border-bottom: 1px solid #eee;
+}
+
 /*
 Header logo
 An example of how to use CSS to display an image as a background of an HTML element.
@@ -101,9 +119,9 @@ An example of how to use CSS to display an image as a background of an HTML elem
 
 a.navbar-brand {
   display: inline-block;
-  height: 141px;
+  height: 139px;
   width: 200px;
-  background: url(../img/es_logo_stacked.png) 0 0 no-repeat;
+  background: url(../img/es_logo_stacked_2.png) 0 0 no-repeat;
   
 }
 .navbar-default {
@@ -112,8 +130,6 @@ a.navbar-brand {
 	border: 0;
 }
 .main-nav {
-  margin-top: 20px;
-	margin-bottom: 20px;
 }
 #menu-main-menu {
   margin-top: 100px
@@ -121,22 +137,54 @@ a.navbar-brand {
 /*
 Carousel
 */
-.carousel .item .container>.row {
+.carousel {
+	margin-top: 20px;
+}
+.carousel .item>.container>.row {
 	padding: 0 15px;
 }
-.carousel .item .container>.row>.col-sm-12 {
+.carousel .item>.container>.row>.col-sm-12 {
+	display: table;
 	height: 300px;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
 }
+.carousel .item>.container>.row>.col-sm-12>.row {
+	display: table-cell;
+	vertical-align: middle;
+}
 .carousel-control.left, .carousel-control.right {
 	background-image: none;
 }
+.carousel h1, .carousel h2, .carousel h3 {
+	font-family: 'PT Serif', serif;
+	color: #fff;
+}
+.carousel h1 {
+	font-size: 40px;
+	font-weight: 600;
+	font-style: italic;
+	margin-bottom: 0;
+}
+.carousel h3 {
+	margin-top: .2em;
+	margin-bottom: 1em;
+}
+
+/*
+Buttons
+*/
+.btn-slide-cta {
+	color: #fff;
+	border: 1px solid #fff;
+}
+
 /*
 Sidebar
 */
-
+#sidebar {
+}
 .sidebar ul,
 .sidebar ol {
   list-style-type: none;
@@ -145,7 +193,10 @@ Sidebar
 .sidebar li {
   margin: 10px 0
 }
-
+.sidebar h3 {
+	margin-top: 2em;
+	font-size: 20px;
+}
 /*
 Hide form placeholders on focus
 */
@@ -230,7 +281,9 @@ ol.commentlist li ul {
 /*
 Woocommerce re-styling
 */
-
+#content > .woocommerce {
+	padding-top: 15px;
+}
 .woocommerce a:focus {
   outline: none
 }
@@ -248,13 +301,16 @@ Woocommerce re-styling
 .woocommerce-page .woocommerce-message:before {
   padding-top: 0
 }
+.fa-btn-text {
+	font-family: FontAwesome;	
+}
 
 @media (max-width: 768px) {
 	a.navbar-brand {
 	  display: inline-block;
-	  height: 58px;
-	  width: 197px;
-	  background: url(../img/es_logo_mobile.png) 0 0 no-repeat;
+	  height: 59px;
+	  width: 200px;
+	  background: url(../img/es_logo_mobile_2.png) 0 0 no-repeat;
 	  
 	}
 	#menu-main-menu {

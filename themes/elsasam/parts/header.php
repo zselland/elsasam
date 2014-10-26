@@ -25,6 +25,7 @@ Delete this whole <nav>...</nav> block if you don't want it, and delete the line
 register_nav_menu('lower-bar', __('Main menu (below site title)'));
 */
 ?>
+<header id="header">
   <div class="container main-nav">
     <nav class="navbar navbar-default navbar-static" role="navigation">
       <div class="navbar-header">
@@ -37,11 +38,11 @@ register_nav_menu('lower-bar', __('Main menu (below site title)'));
         <a class="navbar-brand text-hide" href="<?php echo home_url('/'); ?>"><?php bloginfo('name'); ?></a>
       </div><!-- /.navbar-header -->
       <div class="collapse navbar-collapse lower-navbar">    
-        <?php				
+        <?php        
             $args = array(
               'theme_location' => 'lower-bar',
               'depth' => 0,
-              'container'	=> false,
+              'container'  => false,
               'fallback_cb' => false,
               'menu_class' => 'nav navbar-nav navbar-right',
               'walker' => new BootstrapNavMenuWalker()
@@ -49,6 +50,6 @@ register_nav_menu('lower-bar', __('Main menu (below site title)'));
             wp_nav_menu($args);
         ?>
       </div><!-- /.navbar-collapse -->
-  	</nav>
-
+    </nav>
   </div>
+</header>

@@ -115,3 +115,4 @@ class BootstrapNavMenuWalker extends Walker_Nav_Menu {
 }
 
 register_nav_menu('lower-bar', __('Main menu (below site title)', 'elsasam'));
+register_nav_menu('footer-nav', __('Footer Nav', 'elsasam'));

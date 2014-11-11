@@ -3,7 +3,7 @@
  * Functions for interfacing with Stripe's API
  *
  * @class       S4WC_API
- * @version     1.32
+ * @version     1.33
  * @author      Stephen Zuniga
  */
 
@@ -136,7 +136,7 @@ class S4WC_API {
                 'Authorization' => 'Basic ' . base64_encode( $s4wc->settings['secret_key'] . ':' ),
             ),
             'timeout'       => 70,
-            'sslverify'     => true,
+            'sslverify'     => false,
             'user-agent'    => 'WooCommerce-Stripe',
         ) );
 
@@ -161,7 +161,7 @@ class S4WC_API {
             ),
             'body'          => $post_data,
             'timeout'       => 70,
-            'sslverify'     => true,
+            'sslverify'     => false,
             'user-agent'    => 'WooCommerce-Stripe',
         ) );
 
@@ -184,7 +184,7 @@ class S4WC_API {
                 'Authorization' => 'Basic ' . base64_encode( $s4wc->settings['secret_key'] . ':' ),
             ),
             'timeout'       => 70,
-            'sslverify'     => true,
+            'sslverify'     => false,
             'user-agent'    => 'WooCommerce-Stripe',
         ) );
 

@@ -15,6 +15,19 @@ function elsasam_widgets_init() {
         'after_title' => '</h3>',
     ) );
 
+    /*
+    Blog Sidebar (one widget area)
+     */
+    register_sidebar( array(
+        'name' => __( 'Blog Sidebar', 'elsasam' ),
+        'id' => 'blog-sidebar-widget-area',
+        'description' => __( 'The sidebar widget area for the blog section', 'elsasam' ),
+        'before_widget' => '<section class="%1$s %2$s">',
+        'after_widget' => '</section>',
+        'before_title' => '<h3>',
+        'after_title' => '</h3>',
+    ) );
+
   	/*
     Footer (three widget areas)
      */

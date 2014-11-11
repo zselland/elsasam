@@ -213,16 +213,22 @@ Sidebar
 .sidebar ul,
 .sidebar ol {
   list-style-type: none;
-  padding: 0
+  padding: 0;
+}
+.sidebar ul.children {
+	padding-left: 15px;
 }
 .sidebar li {
-  margin: 10px 0
+  margin: 5px 0
 }
 .sidebar h3 {
 	margin-top: 1.5em;
 	font-size: 20px;
 }
-
+ul.product-categories {
+	font-family: Raleway;
+	font-size: 14px;
+}
 
 
 /*
@@ -371,6 +377,9 @@ ul.tabs li a {
 }
 .woocommerce .product form.cart {
 	margin-bottom: 1em !important;
+}
+.woocommerce .related .row ul li.product {
+	width: 100%;
 }
 
 @media (max-width: 768px) {

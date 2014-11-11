@@ -6,7 +6,7 @@
  *
  * @class       S4WC_Subscriptions_Gateway
  * @extends     S4WC_Gateway
- * @version     1.32
+ * @version     1.33
  * @package     WooCommerce/Classes/Payment
  * @author      Stephen Zuniga
  */
@@ -32,9 +32,8 @@ class S4WC_Subscriptions_Gateway extends S4WC_Gateway {
     public function process_payment( $order_id ) {
 
         if ( WC_Subscriptions_Order::order_contains_subscription( $order_id ) ) {
-            $this->order = new WC_Order( $order_id );
 
-            if ( $this->send_to_stripe() ) {
+            if ( $this->send_to_stripe( $order_id ) ) {
                 $this->order_complete();
 
                 WC_Subscriptions_Manager::activate_subscriptions_for_order( $this->order );
@@ -125,12 +124,16 @@ class S4WC_Subscriptions_Gateway extends S4WC_Gateway {
      * @return      void
      */
     private function charge_set_up() {
+        global $s4wc;
+
         // Add a customer or retrieve an existing one
         $customer = $this->get_customer();
 
+        $customer_info = get_user_meta( $this->order->user_id, $s4wc->settings['stripe_db_location'], true );
+
         // Update default card
-        if ( $form_data['chosen_card'] !== 'new' ) {
-            $default_card = $this->stripe_customer_info['cards'][ intval( $form_data['chosen_card'] ) ]['id'];
+        if ( $this->form_data['chosen_card'] !== 'new' ) {
+            $default_card = $customer_info['cards'][ intval( $this->form_data['chosen_card'] ) ]['id'];
             S4WC_DB::update_customer( $this->order->user_id, array( 'default_card' => $default_card ) );
         }
 

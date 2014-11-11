@@ -36,7 +36,7 @@
     </div>
     
     <div class="col-xs-6 col-sm-4" id="sidebar" role="navigation">
-       <?php get_template_part('parts/sidebar'); ?>
+       <?php get_template_part('parts/sidebar-blog'); ?>
     </div>
     
   </div><!-- /.row -->

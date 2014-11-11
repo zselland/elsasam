@@ -56,4 +56,109 @@ function elsasam_browser_body_class( $classes ) {
 }
 add_filter( 'body_class', 'elsasam_browser_body_class' );
 
+/**
+ * WooCommerce Related Products
+ * --------------------------
+ *
+ * Change number of related products on product page
+ * Set your own value for 'posts_per_page'
+ *
+ */ 
+function woo_related_products_limit() {
+  global $product;
+    
+    $args['posts_per_page'] = 6;
+    return $args;
+}
+add_filter( 'woocommerce_output_related_products_args', 'jk_related_products_args' );
+  function jk_related_products_args( $args ) {
+
+    $args['posts_per_page'] = 4; // 4 related products
+    $args['columns'] = 4; // arranged in 4 columns
+    return $args;
+}
+
+// function woocommerce_product_loop_start() { 
+//     echo '<div class="row es-wc-product-loop">'; 
+// }
+ 
+// function woocommerce_product_loop_end() { 
+//     echo '</div>'; 
+// }
+
+add_action( 'woocommerce_archive_description', 'woocommerce_category_image', 2 );
+function woocommerce_category_image() {
+    if ( is_product_category() ){
+        global $wp_query;
+        $cat = $wp_query->get_queried_object();
+        $thumbnail_id = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true );
+        $image = wp_get_attachment_url( $thumbnail_id );
+        if ( $image ) {
+            echo '<img src="' . $image . '" alt="" />';
+        }
+    }
+}
+
+/**
+* Show all product attributes on the product page
+*/
+function isa_woocommerce_all_pa(){
+ 
+    global $product;
+    $attributes = $product->get_attributes();
+ 
+    if ( ! $attributes ) {
+        return;
+    }
+ 
+    $out = '<ul class="custom-attributes">';
+ 
+    foreach ( $attributes as $attribute ) {
+ 
+ 
+        // skip variations
+        if ( $attribute['is_variation'] ) {
+        continue;
+        }
+ 
+ 
+        if ( $attribute['is_taxonomy'] ) {
+ 
+            $terms = wp_get_post_terms( $product->id, $attribute['name'], 'all' );
+ 
+            // get the taxonomy
+            $tax = $terms[0]->taxonomy;
+ 
+            // get the tax object
+            $tax_object = get_taxonomy($tax);
+ 
+            // get tax label
+            if ( isset ($tax_object->labels->name) ) {
+                $tax_label = $tax_object->labels->name;
+            } elseif ( isset( $tax_object->label ) ) {
+                $tax_label = $tax_object->label;
+            }
+ 
+            foreach ( $terms as $term ) {
+                $archive_link = get_term_link( $term->slug, $tax );
+                $out .= '<li class="' . esc_attr( $attribute['name'] ) . ' ' . esc_attr( $term->slug ) . '">';
+                $out .= '<span class="attribute-label">' . $tax_label . ': </span> ';
+                $out .= '<a href="'.$archive_link.'"><span class="attribute-value">' . $term->name . '</span></a></li>';
+ 
+            }
+ 
+        } else {
+ 
+            $out .= '<li class="' . sanitize_title($attribute['name']) . ' ' . sanitize_title($attribute['value']) . '">';
+            $out .= '<span class="attribute-label">' . $attribute['name'] . ': </span> ';
+            $out .= '<span class="attribute-value">' . $attribute['value'] . '</span></li>';
+        }
+    }
+ 
+    $out .= '</ul>';
+ 
+    echo $out;
+}
+add_action('woocommerce_single_product_summary', 'isa_woocommerce_all_pa', 25);
+
 add_theme_support( 'woocommerce' );

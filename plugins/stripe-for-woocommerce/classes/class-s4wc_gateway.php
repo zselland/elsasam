@@ -6,7 +6,7 @@
  *
  * @class       S4WC_Gateway
  * @extends     WC_Payment_Gateway
- * @version     1.32
+ * @version     1.33
  * @package     WooCommerce/Classes/Payment
  * @author      Stephen Zuniga
  */
@@ -285,7 +285,7 @@ class S4WC_Gateway extends WC_Payment_Gateway {
         wp_enqueue_script( 'stripe', 'https://js.stripe.com/v2/', false, '2.0', true );
 
         // Plugin js
-        wp_enqueue_script( 's4wc_js', plugins_url( 'assets/js/s4wc.min.js', dirname( __FILE__ ) ), array( 'stripe', 'wc-credit-card-form' ), '1.32', true );
+        wp_enqueue_script( 's4wc_js', plugins_url( 'assets/js/s4wc.min.js', dirname( __FILE__ ) ), array( 'stripe', 'wc-credit-card-form' ), '1.33', true );
 
         // Add data that s4wc.js needs
         $s4wc_info = array(
@@ -423,9 +423,7 @@ class S4WC_Gateway extends WC_Payment_Gateway {
      */
     public function process_payment( $order_id ) {
 
-        $this->order = new WC_Order( $order_id );
-
-        if ( $this->send_to_stripe() ) {
+        if ( $this->send_to_stripe( $order_id ) ) {
             $this->order_complete();
 
             $result = array(
@@ -508,10 +506,14 @@ class S4WC_Gateway extends WC_Payment_Gateway {
      * Handles sending the charge to an existing customer, a new customer (that's logged in), or a guest
      *
      * @access      protected
+     * @param       int $order_id
      * @return      bool
      */
-    protected function send_to_stripe() {
+    protected function send_to_stripe( $order_id ) {
         global $s4wc;
+
+        // Get the order based on order_id
+        $this->order = new WC_Order( $order_id );
 
         // Get the credit card details submitted by the form
         $this->form_data = $this->get_form_data();
@@ -561,7 +563,6 @@ class S4WC_Gateway extends WC_Payment_Gateway {
         global $s4wc;
 
         $output = array();
-        $user = get_userdata( $this->order->user_id );
         $customer_info = get_user_meta( $this->order->user_id, $s4wc->settings['stripe_db_location'], true );
 
         if ( $customer_info ) {
@@ -570,7 +571,7 @@ class S4WC_Gateway extends WC_Payment_Gateway {
             $customer = S4WC_API::get_customer( $customer_info['customer_id'] );
 
             // If the user doesn't have cards or is adding a new one
-            if ( ! count( $customer_info['cards'] ) || $this->form_data['chosen_card'] == 'new' ) {
+            if ( $this->form_data['chosen_card'] === 'new' ) {
 
                 // Add new card on stripe servers and make default
                 $card = S4WC_API::update_customer( $customer_info['customer_id'] . '/cards', array(
@@ -596,6 +597,8 @@ class S4WC_Gateway extends WC_Payment_Gateway {
             }
 
         } else {
+
+            $user = get_userdata( $this->order->user_id );
 
             // Allow options to be set without modifying sensitive data like token, email, etc
             $customer_data = apply_filters( 's4wc_customer_data', array(), $this->form_data, $this->order );
@@ -797,6 +800,9 @@ class S4WC_Gateway extends WC_Payment_Gateway {
      * @return      void
      */
     private function charge_set_up() {
+        global $s4wc;
+
+        $customer_info = get_user_meta( $this->order->user_id, $s4wc->settings['stripe_db_location'], true );
 
         // Allow options to be set without modifying sensitive data like amount, currency, etc.
         $stripe_charge_data = apply_filters( 's4wc_charge_data', array(), $this->form_data, $this->order );
@@ -816,8 +822,8 @@ class S4WC_Gateway extends WC_Payment_Gateway {
             $stripe_charge_data['customer'] = $customer['customer_id'];
 
             // Update default card
-            if ( count( $this->stripe_customer_info['cards'] ) && $this->form_data['chosen_card'] !== 'new' ) {
-                $default_card = $this->stripe_customer_info['cards'][ intval( $this->form_data['chosen_card'] ) ]['id'];
+            if ( count( $customer_info['cards'] ) && $this->form_data['chosen_card'] !== 'new' ) {
+                $default_card = $customer_info['cards'][ intval( $this->form_data['chosen_card'] ) ]['id'];
                 S4WC_DB::update_customer( $this->order->user_id, array( 'default_card' => $default_card ) );
             }
 

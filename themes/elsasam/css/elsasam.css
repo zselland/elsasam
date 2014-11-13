@@ -381,6 +381,13 @@ ul.tabs li a {
 .woocommerce .related .row ul li.product {
 	width: 100%;
 }
+ul.custom-attributes {
+	list-style-type: none;
+	padding-left: 0;
+	font-family: Raleway;
+	font-size: 12px;
+	margin-bottom: 1.5em;
+}
 
 @media (max-width: 768px) {
 	a.navbar-brand {

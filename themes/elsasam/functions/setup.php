@@ -57,6 +57,33 @@ function elsasam_browser_body_class( $classes ) {
 add_filter( 'body_class', 'elsasam_browser_body_class' );
 
 /**
+* show custom order column values
+*/
+function show_order_column($name){
+  global $post;
+
+  switch ($name) {
+    case 'menu_order':
+      $order = $post->menu_order;
+      echo $order;
+      break;
+   default:
+      break;
+   }
+}
+add_action('manage_slide_posts_custom_column','show_order_column');
+
+/**
+* make column sortable
+*/
+function order_column_register_sortable($columns){
+  $columns['menu_order'] = 'menu_order';
+  return $columns;
+}
+add_filter('manage_edit-slide_sortable_columns','order_column_register_sortable');
+
+
+/**
  * WooCommerce Related Products
  * --------------------------
  *
@@ -94,7 +121,7 @@ function woocommerce_category_image() {
         $thumbnail_id = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true );
         $image = wp_get_attachment_url( $thumbnail_id );
         if ( $image ) {
-            echo '<img src="' . $image . '" alt="" />';
+            echo '<img class="cat-img" src="' . $image . '" alt="" />';
         }
     }
 }

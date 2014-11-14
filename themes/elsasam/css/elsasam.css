@@ -186,6 +186,12 @@ Carousel
 	font-family: 'PT Serif', serif;
 	color: #fff;
 }
+.carousel .light h1, .carousel .light h2, .carousel .light h3 {
+	text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+}
+.carousel .dark h1, .carousel .dark h2, .carousel .dark h3 {
+	color: #333;
+}
 .carousel h1 {
 	font-size: 40px;
 	font-weight: 600;
@@ -203,6 +209,19 @@ Buttons
 .btn-slide-cta {
 	color: #fff;
 	border: 1px solid #fff;
+}
+.btn-slide-cta:hover {
+	color: #fff;
+	background-color: rgba(255, 255, 255, 0.25);
+}
+.dark .btn-slide-cta {
+	color: #333;
+	border: 1px solid #333;
+}
+.light .btn-slide-cta {
+	text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+	-moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
 }
 
 /*
@@ -388,6 +407,9 @@ ul.custom-attributes {
 	font-size: 12px;
 	margin-bottom: 1.5em;
 }
+img.cat-img {
+	margin-bottom: 15px;
+}
 
 @media (max-width: 768px) {
 	a.navbar-brand {
@@ -400,4 +422,8 @@ ul.custom-attributes {
 	#menu-main-menu {
 	  margin-top: 0
 	}	
+	.carousel .item>.container>.row>.col-sm-12 {
+		display: table;
+		width: 100%;
+	}
 }

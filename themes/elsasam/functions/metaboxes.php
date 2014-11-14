@@ -47,6 +47,16 @@ function elsasam_metaboxes( array $meta_boxes ) {
 				'options' => array( 'textarea_rows' => 5, ),
 			),
 			array(
+			    'name' => 'CTA Color',
+			    'id'   => $prefix . 'slide_cta_color',
+			    'type' => 'select',
+			    'options' => array(
+					'light' => __( 'Light', 'cmb' ),
+					'dark' => __( 'Dark', 'cmb' ),
+				),
+			    'default'  => 'Light',
+			),
+			array(
 				'name'    => __( 'CTA Position', 'cmb' ),
 				'desc'    => __( 'Select the horizontal position for the CTA', 'cmb' ),
 				'id'      => $prefix . 'slide_cta_position',

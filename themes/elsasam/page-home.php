@@ -40,6 +40,7 @@ $slide_query = new WP_Query( $slide_args );
 	
 	<?php 
 		$cta_align_class = get_post_meta($post->ID, '_elsasam_slide_cta_position', true);
+		$cta_color_class = get_post_meta( $post->ID, '_elsasam_slide_cta_color', true );
 	?>
 
     <div class="item <?php echo $active; ?> post-ID-<?php echo $post->ID; ?>">
@@ -48,7 +49,7 @@ $slide_query = new WP_Query( $slide_args );
 				<div class="col-sm-12" style="background-image:url(<?php echo get_post_meta($post->ID, '_elsasam_bg_image', true); ?>);">
 					<div class="row">
 						<div class="<?php echo $cta_align_class; ?>">
-							<div class="slide-cta">
+							<div class="slide-cta <?php echo $cta_color_class; ?>">
 								<?php echo wpautop(get_post_meta($post->ID, '_elsasam_slide_cta', true)); ?>
 							</div>
 						</div>

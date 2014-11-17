@@ -21,7 +21,7 @@ class WC_Shipstation_API_Export extends WC_Shipstation_API_Request {
 		$xml = new DOMDocument( '1.0', 'utf-8' );
 		$xml->formatOutput = true;
 
-		$page      = isset( $_GET['page'] ) ? absint( $_GET['page'] ) : 1;
+		$page      = max( 1, isset( $_GET['page'] ) ? absint( $_GET['page'] ) : 1 );
 		$exported  = 0;
 		$tz_offset = get_option( 'gmt_offset' ) * 3600;
 		$order_ids = $wpdb->get_col(
@@ -31,6 +31,7 @@ class WC_Shipstation_API_Export extends WC_Shipstation_API_Request {
 					AND post_status IN ( '" . implode( "','", WC_ShipStation_Integration::$export_statuses ) . "' )
 					AND %s <= post_date_gmt
 					AND post_date_gmt <= %s
+					ORDER BY post_date_gmt DESC
 					LIMIT %d, %d
 				",
 				gmdate( "Y-m-d H:i:s", strtotime( $_GET['start_date'] ) ),
@@ -39,27 +40,23 @@ class WC_Shipstation_API_Export extends WC_Shipstation_API_Request {
 				WC_SHIPSTATION_EXPORT_LIMIT
 			)
 		);
+		$max_results = $wpdb->get_var(
+			$wpdb->prepare( "
+					SELECT COUNT(ID) FROM {$wpdb->posts}
+					WHERE post_type = 'shop_order'
+					AND post_status IN ( '" . implode( "','", WC_ShipStation_Integration::$export_statuses ) . "' )
+					AND %s <= post_date_gmt
+					AND post_date_gmt <= %s
+				",
+				gmdate( "Y-m-d H:i:s", strtotime( $_GET['start_date'] ) ),
+				gmdate( "Y-m-d H:i:s", strtotime( $_GET['end_date'] ) )
+			)
+		);
 
 		$orders_xml = $xml->createElement( "Orders" );
 
 		foreach ( $order_ids as $order_id ) {
-			$order          = wc_get_order( $order_id );
-			$needs_shipping = false;
-
-			// Need to ship?
-			foreach ( $order->get_items() as $item_id => $item ) {
-				$product = $order->get_product_from_item( $item );
-
-				if ( $product->needs_shipping() ) {
-					$needs_shipping = true;
-					break;
-				}
-			}
-
-			if ( ! $needs_shipping ) {
-				continue;
-			}
-
+			$order     = wc_get_order( $order_id );
 			$order_xml = $xml->createElement( "Order" );
 
 			$this->xml_append( $order_xml, 'OrderNumber', ltrim( $order->get_order_number(), '#' ) );
@@ -130,7 +127,8 @@ class WC_Shipstation_API_Export extends WC_Shipstation_API_Request {
   			$order_xml->appendChild( $customer_xml );
 
   			// Item data
-  			$items_xml = $xml->createElement( "Items" );
+  			$found_item = false;
+  			$items_xml  = $xml->createElement( "Items" );
 
   			foreach ( $order->get_items() as $item_id => $item ) {
 				$product  = $order->get_product_from_item( $item );
@@ -139,8 +137,9 @@ class WC_Shipstation_API_Export extends WC_Shipstation_API_Request {
 					continue;
 				}
 
-				$item_xml = $xml->createElement( "Item" );
-				$image_id = $product->get_image_id();
+				$found_item = true;
+				$item_xml   = $xml->createElement( "Item" );
+				$image_id   = $product->get_image_id();
 
 				if ( $image_id ) {
 					$image_url = current( wp_get_attachment_image_src( $image_id, 'shop_thumbnail' ) );
@@ -179,6 +178,10 @@ class WC_Shipstation_API_Export extends WC_Shipstation_API_Request {
 				$items_xml->appendChild( $item_xml );
   			}
 
+  			if ( ! $found_item ) {
+  				continue;
+  			}
+
   			// Append cart level discount line
   			if ( $order->get_order_discount() ) {
 	  			$item_xml  = $xml->createElement( "Item" );
@@ -188,16 +191,20 @@ class WC_Shipstation_API_Export extends WC_Shipstation_API_Request {
 				$this->xml_append( $item_xml, 'Quantity', 1, false );
 				$this->xml_append( $item_xml, 'UnitPrice', $order->get_order_discount(), false );
 				$items_xml->appendChild( $item_xml );
+				$found_item = true;
 			}
 
 			// Append items XML
-  			$order_xml->appendChild( $items_xml );
+			if ( $found_item ) {
+  				$order_xml->appendChild( $items_xml );
+  			}
   			$orders_xml->appendChild( $order_xml );
 
 			$exported ++;
 		}
 
 		$orders_xml->setAttribute( "page", $page );
+		$orders_xml->setAttribute( "pages", ceil( $max_results / WC_SHIPSTATION_EXPORT_LIMIT ) );
 		$xml->appendChild( $orders_xml );
 		echo $xml->saveXML();
 

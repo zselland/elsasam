@@ -51,15 +51,18 @@ class WC_Shipstation_API_Shipnotify extends WC_Shipstation_API_Request {
 		}
 
 		if ( ! empty( $shipstation_xml ) && function_exists( 'simplexml_load_string' ) ) {
+			$this->log( __( "ShipNotify XML: ", 'woocommerce-shipstation' ) . print_r( $shipstation_xml, true ) );
+
 			$xml = simplexml_load_string( $shipstation_xml );
 			if ( isset( $xml->ShipDate ) ) {
 				$timestamp = strtotime( (string) $xml->ShipDate );
 			}
 			if ( isset( $xml->Items ) ) {
-				$items = (array) $xml->Items;
-
+				$items = $xml->Items;
 				if ( $items ) {
-					foreach ( $items as $item ) {
+					foreach ( $items->Item as $item ) {
+						$this->log( __( "ShipNotify Item: ", 'woocommerce-shipstation' ) . print_r( $item, true ) );
+
 						$item_sku    = wc_clean( (string) $item->SKU );
 						$item_name   = wc_clean( (string) $item->Name );
 						$qty_shipped = absint( $item->Quantity );
@@ -76,7 +79,7 @@ class WC_Shipstation_API_Shipnotify extends WC_Shipstation_API_Request {
 		}
 
 		// If we have a list of shipped items, we can customise the note + see if the order is not yet complete
-		if ( $shipped_items ) {
+		if ( sizeof( $shipped_items ) > 0 ) {
 			$order_note            = sprintf( __( '%s shipped via %s on %s with tracking number %s.', 'woocommerce' ), esc_html( implode( ', ', $shipped_items ) ), esc_html( $carrier ), date_i18n( get_option( 'date_format' ), $timestamp ), $tracking_number );
 			$current_shipped_items = max( get_post_meta( $order->id, '_shipstation_shipped_item_count', true ), 0 );
 			$total_item_count      = $this->order_items_to_ship_count( $order );

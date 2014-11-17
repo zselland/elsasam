@@ -82,6 +82,15 @@ function order_column_register_sortable($columns){
 }
 add_filter('manage_edit-slide_sortable_columns','order_column_register_sortable');
 
+/**
+* extra HTML for Maintenance Mode plugin
+*/
+// function new_text($text) {
+// $text = '<a class="logo"></a>';
+//     return $text;
+// }
+
+// add_filter('wpmm_text', 'new_text');
 
 /**
  * WooCommerce Related Products

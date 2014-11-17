@@ -2,8 +2,8 @@
 	http://dev3.elsasam.com/wp-content/themes/elsasam/css/elsasam.css
 	http://elsasam.local/wp-content/themes/elsasam/css/elsasam.css */
 
-@import url(http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic);
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,700,900,200);
+@import url(//fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic);
+@import url(//fonts.googleapis.com/css?family=Raleway:400,700,900,200);
 @font-face {
     font-family: 'Sina Nova';
     src: url('../fonts/SinaNovaReg-webfont.eot');

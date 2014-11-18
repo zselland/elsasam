@@ -38,6 +38,12 @@ register_nav_menu('lower-bar', __('Main menu (below site title)'));
         <a class="navbar-brand text-hide" href="<?php echo home_url('/'); ?>"><?php bloginfo('name'); ?></a>
       </div><!-- /.navbar-header -->
       <div class="collapse navbar-collapse lower-navbar">    
+        <?php global $woocommerce; ?>
+        <ul id="woo-cart" class="nav navbar-nav navbar-right">
+          <li>
+            <a class="cart-contents" href="<?php echo $woocommerce->cart->get_cart_url(); ?>" title="<?php _e('View your shopping cart', 'woothemes'); ?>"><?php echo sprintf(_n('%d item', '%d items', $woocommerce->cart->cart_contents_count, 'woothemes'), $woocommerce->cart->cart_contents_count);?> - <?php echo $woocommerce->cart->get_cart_total(); ?></a>
+          </li>
+        </ul>
         <?php        
             $args = array(
               'theme_location' => 'lower-bar',

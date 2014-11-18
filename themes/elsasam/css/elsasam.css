@@ -156,8 +156,24 @@ a.navbar-brand {
 .nav {
 	font-family: Raleway;
 }
-#menu-main-menu {
+#menu-main-menu, #woo-cart {
   margin-top: 100px
+}
+#woo-cart {
+	font-size: 12px;
+	text-transform: uppercase;
+}
+#woo-cart a {
+	padding: 5px 8px 5px 10px;
+	border: 1px solid #999;
+	border-radius: 5px;
+	margin-left: 25px;
+	margin-top: 7px;
+}
+#woo-cart a:before {
+	font-family: FontAwesome;
+	content: '\f07a';
+	margin-right: 8px;
 }
 /*
 Carousel

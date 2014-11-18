@@ -435,9 +435,12 @@ img.cat-img {
 	  background: url(../img/es_logo_mobile_5.png) 0 0 no-repeat;
 	  
 	}
-	#menu-main-menu {
+	#menu-main-menu, #woo-cart {
 	  margin-top: 0
 	}	
+	#woo-cart a {
+		margin-left: 0;
+	}
 	.carousel .item>.container>.row>.col-sm-12 {
 		display: table;
 		width: 100%;

@@ -92,6 +92,63 @@ add_filter('manage_edit-slide_sortable_columns','order_column_register_sortable'
 
 // add_filter('wpmm_text', 'new_text');
 
+add_filter( 'woocommerce_cart_shipping_packages', 'dropship_woocommerce_cart_shipping_packages' );
+
+function dropship_woocommerce_cart_shipping_packages( $packages ) {
+    // Reset the packages
+    $packages = array();
+  
+    // Bulky items
+    $dropship_items = array();
+    $regular_items = array();
+    
+    // Sort bulky from regular
+    foreach ( WC()->cart->get_cart() as $item ) {
+        if ( $item['data']->needs_shipping() ) {
+            if ( $item['data']->get_shipping_class() == 'wacamole' ) {
+                $dropship_items[] = $item;
+            } else {
+                $regular_items[] = $item;
+            }
+        }
+    }
+    
+    // Put inside packages
+    if ( $dropship_items ) {
+        $packages[] = array(
+            'ship_via' => array( 'flat_rate' ),
+            'contents' => $dropship_items,
+            'contents_cost' => array_sum( wp_list_pluck( $dropship_items, 'line_total' ) ),
+            'applied_coupons' => WC()->cart->applied_coupons,
+            'destination' => array(
+                'country' => WC()->customer->get_shipping_country(),
+                'state' => WC()->customer->get_shipping_state(),
+                'postcode' => WC()->customer->get_shipping_postcode(),
+                'city' => WC()->customer->get_shipping_city(),
+                'address' => WC()->customer->get_shipping_address(),
+                'address_2' => WC()->customer->get_shipping_address_2()
+            )
+        );
+    }
+    if ( $regular_items ) {
+        $packages[] = array(
+            'contents' => $regular_items,
+            'contents_cost' => array_sum( wp_list_pluck( $regular_items, 'line_total' ) ),
+            'applied_coupons' => WC()->cart->applied_coupons,
+            'destination' => array(
+                'country' => WC()->customer->get_shipping_country(),
+                'state' => WC()->customer->get_shipping_state(),
+                'postcode' => WC()->customer->get_shipping_postcode(),
+                'city' => WC()->customer->get_shipping_city(),
+                'address' => WC()->customer->get_shipping_address(),
+                'address_2' => WC()->customer->get_shipping_address_2()
+            )
+        );
+    }    
+    
+    return $packages;
+}
+
 /**
  * WooCommerce Related Products
  * --------------------------

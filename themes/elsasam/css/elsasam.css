@@ -274,7 +274,10 @@ select, input {
 	font-size: .85em;
 	font-weight: 500 !important;
 }
-
+input#coupon_code {
+	font-size: .8em;
+	height: inherit;
+}
 
 /*
 Hide form placeholders on focus
@@ -389,7 +392,7 @@ Woocommerce re-styling
 .fa-btn-text {
 	font-family: FontAwesome;	
 }
-.woocommerce a.button, .woocommerce button.button.alt, .woocommerce button.button {
+.woocommerce a.button, .woocommerce button.button.alt, .woocommerce button.button, #content .woocommerce input.button {
 	font-family: Raleway;
 	font-size: .8em;
 	font-weight: 300 !important;
@@ -426,7 +429,20 @@ ul.custom-attributes {
 img.cat-img {
 	margin-bottom: 15px;
 }
-
+.woocommerce .cart-collaterals .cart_totals {
+	width: 60%;
+	font-family: Raleway;
+	font-size: 12px;
+}
+.woocommerce .cart-collaterals .cart_totals label {
+	font-weight: 300;
+	display: inline;
+}
+@media (max-width: 970px) {
+	.woocommerce .cart-collaterals .cart_totals {
+		width: 80%;
+	}
+}
 @media (max-width: 768px) {
 	a.navbar-brand {
 	  display: inline-block;

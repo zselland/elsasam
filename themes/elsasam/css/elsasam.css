@@ -20,9 +20,15 @@ body {
 	font-family: 'Sina Nova', serif;
 	font-size: 16px;
 }
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, h3 label {
 	font-family: Raleway, Helvetica, Arial, sans-serif;
 	font-weight: 300;
+	color: #444;
+}
+#content label {
+	font-family: Raleway, Helvetica, Arial, sans-serif;
+	font-weight: 300;
+	font-size: 13px;
 	color: #444;
 }
 h1 {
@@ -34,8 +40,12 @@ h1.page-title {
 h2 {
 	font-size: 24px;
 }
-h3 {
+h3, h3#ship-to-different-address label {
 	font-size: 20px;
+}
+h3 label.checkbox {
+	margin-top: 0 !important;
+	display: inline;
 }
 #content-inner {
 	padding-top: 30px;
@@ -434,7 +444,7 @@ img.cat-img {
 	font-family: Raleway;
 	font-size: 12px;
 }
-.woocommerce .cart-collaterals .cart_totals label {
+.woocommerce .cart-collaterals .cart_totals label, .woocommerce .shipping label {
 	font-weight: 300;
 	display: inline;
 }

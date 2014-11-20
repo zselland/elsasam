@@ -179,7 +179,7 @@ add_filter( 'woocommerce_output_related_products_args', 'jk_related_products_arg
 //     echo '</div>'; 
 // }
 
-add_action( 'woocommerce_archive_description', 'woocommerce_category_image', 2 );
+add_action( 'woocommerce_archive_description', 'woocommerce_category_image', 20 );
 function woocommerce_category_image() {
     if ( is_product_category() ){
         global $wp_query;

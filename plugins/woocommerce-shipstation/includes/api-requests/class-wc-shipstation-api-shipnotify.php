@@ -28,6 +28,36 @@ class WC_Shipstation_API_Shipnotify extends WC_Shipstation_API_Request {
 	}
 
 	/**
+	 * Get the order ID from the order number
+	 *
+	 * @param string $order_number
+	 * @return integer
+	 */
+	private function get_order_id( $order_number ) {
+		if ( class_exists( 'WC_Seq_Order_Number' ) ) {
+
+			global $wc_seq_order_number;
+
+			$order_id = $wc_seq_order_number->find_order_by_order_number( $order_number );
+
+		} elseif ( class_exists( 'WC_Seq_Order_Number_Pro' ) ) {
+
+			global $wc_seq_order_number_pro;
+
+			$order_id = $wc_seq_order_number_pro->find_order_by_order_number( $order_number );
+
+		} else {
+			$order_id = $order_number;
+		}
+
+		if ( 0 === $order_id ) {
+			$order_id = $order_number;
+		}
+
+		return absint( $order_id );
+	}
+
+	/**
 	 * Do the request
 	 */
 	public function request() {
@@ -35,7 +65,7 @@ class WC_Shipstation_API_Shipnotify extends WC_Shipstation_API_Request {
 
 		$this->validate_input( array( "order_number", "carrier" ) );
 
-		$order_number       = absint( $_GET['order_number'] );
+		$order_number       = $this->get_order_id( $_GET['order_number'] );
 		$tracking_number    = empty( $_GET['tracking_number'] ) ? '' : wc_clean( $_GET['tracking_number'] );
 		$carrier            = empty( $_GET['carrier'] ) ? '' : wc_clean( $_GET['carrier'] );
 		$order              = wc_get_order( $order_number );

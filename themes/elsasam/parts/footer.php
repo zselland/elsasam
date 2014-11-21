@@ -22,7 +22,8 @@
     </div>
   </div>
 </div>
-
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-546ed4bf70987c08" async="async"></script>
 <?php wp_footer(); ?>
 </body>
 </html>

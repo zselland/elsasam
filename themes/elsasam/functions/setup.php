@@ -254,4 +254,10 @@ function isa_woocommerce_all_pa(){
 }
 add_action('woocommerce_single_product_summary', 'isa_woocommerce_all_pa', 25);
 
+function addthis_to_products() {
+    $out = '<div class="addthis_sharing_toolbox"></div>';
+    echo $out;
+}
+add_action('woocommerce_single_product_summary', 'addthis_to_products', 40);
+
 add_theme_support( 'woocommerce' );

@@ -1,6 +1,7 @@
 /* @override 
 	http://dev3.elsasam.com/wp-content/themes/elsasam/css/elsasam.css
-	http://elsasam.local/wp-content/themes/elsasam/css/elsasam.css */
+	http://elsasam.local/wp-content/themes/elsasam/css/elsasam.css
+	https://elsasam.local/wp-content/themes/elsasam/css/elsasam.css */
 
 @import url(//fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic);
 @import url(//fonts.googleapis.com/css?family=Raleway:400,700,900,200);
@@ -375,7 +376,9 @@ ol.commentlist li ul {
 .reply p {
   margin: 0
 }
-
+.addthis_sharing_toolbox {
+	margin-top: 15px;
+}
 /*
 Woocommerce re-styling
 */

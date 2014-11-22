@@ -29,7 +29,7 @@ function elsasam_enqueues()
 	wp_register_style('bootstrap-css', get_template_directory_uri() . '/css/bootstrap.min.css', false, null);
 	wp_enqueue_style('bootstrap-css');
 
-  	wp_register_style('elsasam-css', get_template_directory_uri() . '/css/elsasam.css', false, null);
+  	wp_register_style('elsasam-css', get_template_directory_uri() . '/css/elsasam.css', false, '1.00', null);
 	wp_enqueue_style('elsasam-css');
 
     wp_register_style('fontawesome-css', '//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', false, null);

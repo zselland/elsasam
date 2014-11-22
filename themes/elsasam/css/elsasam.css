@@ -1,4 +1,11 @@
 /* @override 
+	https://elsasam.local/wp-content/themes/elsasam/css/elsasam.css */
+
+/* @group Untitled Group */
+
+
+
+/* @end *//* @override 
 	http://dev3.elsasam.com/wp-content/themes/elsasam/css/elsasam.css
 	http://elsasam.local/wp-content/themes/elsasam/css/elsasam.css
 	https://elsasam.local/wp-content/themes/elsasam/css/elsasam.css */
@@ -319,6 +326,18 @@ Footer
 .footer .nav a {
 	color: #666;
 }
+.footer ul.social a {
+	color: #666;
+}
+.footer ul.social a:hover {
+	color: #3b5998;
+}
+.footer ul.social a.pin:hover {
+	color: #C92228;
+}
+.footer ul.social a.inst:hover {
+	color: #517fa4;
+}
 
 /*
 Commentlist
@@ -473,5 +492,15 @@ img.cat-img {
 	.carousel .item>.container>.row>.col-sm-12 {
 		display: table;
 		width: 100%;
+	}
+	ul.social.pull-right {
+		float: none !important;
+		text-align: center;
+	}
+	ul#menu-footer-menu.pull-left {
+		float: none !important;
+		display: inline-block;
+		margin: 0 auto;
+		text-align: center;
 	}
 }

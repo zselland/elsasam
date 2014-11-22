@@ -10,6 +10,11 @@ function elsasam_setup() {
 }
 add_action('init', 'elsasam_setup');
 
+/**
+ * Add Redux Framework & extras
+ */
+require get_template_directory() . '/admin/admin-init.php';
+
 if (! isset($content_width))
 	$content_width = 600;
 

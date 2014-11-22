@@ -3,17 +3,30 @@
 	<div class="row">
     <?php dynamic_sidebar('footer-widget-area'); ?>
   </div>
-          <?php        
-            $args = array(
-              'theme_location' => 'footer-nav',
-              'depth' => 1,
-              'container'  => false,
-              'fallback_cb' => false,
-              'menu_class' => 'nav nav-pills',
-              'walker' => new BootstrapNavMenuWalker()
-            );
-            wp_nav_menu($args);
-        ?>
+  <div class="row">
+    <?php 
+      global $redux_es;
+      $fb_url = $redux_es['opt-text-url-facebook'];
+      $pin_url = $redux_es['opt-text-url-pinterest'];
+      $inst_url = $redux_es['opt-text-url-instagram'];
+    ?>
+    <ul class="social pull-right list-inline">
+      <li><a class="fb" href="<?php echo $fb_url; ?>"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+      <li><a class="pin" href="<?php echo $pin_url; ?>"><i class="fa fa-pinterest-square fa-2x"></i></a></li>
+      <li><a class="inst" href="<?php echo $inst_url; ?>"><i class="fa fa-instagram fa-2x"></i></a></li>
+    </ul>
+    <?php        
+      $args = array(
+        'theme_location' => 'footer-nav',
+        'depth' => 1,
+        'container'  => false,
+        'fallback_cb' => false,
+        'menu_class' => 'nav nav-pills pull-left',
+        'walker' => new BootstrapNavMenuWalker()
+      );
+      wp_nav_menu($args);
+    ?>
+  </div>
 
   <hr/>
   <div class="row">

@@ -11,9 +11,17 @@
       $inst_url = $redux_es['opt-text-url-instagram'];
     ?>
     <ul class="social pull-right list-inline">
-      <li><a class="fb" href="<?php echo $fb_url; ?>"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-      <li><a class="pin" href="<?php echo $pin_url; ?>"><i class="fa fa-pinterest-square fa-2x"></i></a></li>
-      <li><a class="inst" href="<?php echo $inst_url; ?>"><i class="fa fa-instagram fa-2x"></i></a></li>
+      <?php 
+        if ($fb_url != '') { 
+          echo '<li><a class="fb" href="'.$fb_url.'"><i class="fa fa-facebook-square fa-2x"></i></a></li>';
+        }
+        if ($pin_url != '') { 
+          echo '<li><a class="pin" href="'.$pin_url.'"><i class="fa fa-pinterest-square fa-2x"></i></a></li>';
+        }
+        if ($inst_url != '') { 
+          echo '<li><a class="inst" href="'.$inst_url.'"><i class="fa fa-instagram fa-2x"></i></a></li>';
+        }
+      ?>
     </ul>
     <?php        
       $args = array(

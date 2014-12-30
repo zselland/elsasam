@@ -1,6 +1,0 @@
-ÏEvT<?php exit; ?>a:1:{s:7:"content";O:8:"stdClass":24:{s:2:"ID";i:44;s:11:"post_author";s:1:"1";s:9:"post_date";s:19:"2014-10-18 17:32:53";s:13:"post_date_gmt";s:19:"2014-10-18 17:32:53";s:12:"post_content";s:364:"<h2>Independent Designers + Art + Uncommon Quality = A Happy Home!</h2>
-
-<p>elsa+sam offers high-quality and functional dishware, beautiful linens for the kitchen and art for the home. We believe in keeping the home colorful and happy with these fine products made by extraordinary designers from around the world.</p>
-
-<p>Enjoy, and thanks for visiting!</p>
-";s:10:"post_title";s:8:"About Us";s:12:"post_excerpt";s:0:"";s:11:"post_status";s:7:"publish";s:14:"comment_status";s:4:"open";s:11:"ping_status";s:4:"open";s:13:"post_password";s:0:"";s:9:"post_name";s:8:"about-us";s:7:"to_ping";s:0:"";s:6:"pinged";s:0:"";s:13:"post_modified";s:19:"2014-11-18 02:05:17";s:17:"post_modified_gmt";s:19:"2014-11-18 02:05:17";s:21:"post_content_filtered";s:0:"";s:11:"post_parent";i:0;s:4:"guid";s:32:"http://elsasam.local/?page_id=44";s:10:"menu_order";i:0;s:9:"post_type";s:4:"page";s:14:"post_mime_type";s:0:"";s:13:"comment_count";s:1:"0";s:6:"filter";s:3:"raw";}}

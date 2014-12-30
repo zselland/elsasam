@@ -1,0 +1,4 @@
+advanced-cache.php
+wp-cache-config.php
+cache/*
+cache/supercache/*

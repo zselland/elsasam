@@ -1,1 +1,0 @@
-}ívT<?php exit; ?>a:1:{s:7:"content";a:3:{s:17:"wp-migrate-db-pro";a:2:{s:7:"version";s:5:"1.4.4";s:6:"tested";s:5:"4.0.1";}s:29:"wp-migrate-db-pro-media-files";a:2:{s:7:"version";s:3:"1.2";s:6:"tested";s:5:"4.0.1";}s:21:"wp-migrate-db-pro-cli";a:2:{s:7:"version";s:5:"1.0.2";s:6:"tested";s:5:"4.0.1";}}}
